@@ -27,7 +27,7 @@ public class BookController {
   private AuthorRepository authorRepository;
 
   @GetMapping
-  public Iterable findAll() {
+  public Iterable<Book> findAll() {
     return bookRepository.findAll();
   }
 
