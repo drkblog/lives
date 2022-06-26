@@ -4,9 +4,11 @@ import ar.com.drk.live1.error_handling.BookIdMismatchException;
 import ar.com.drk.live1.error_handling.BookNotFoundException;
 import ar.com.drk.live1.model.Author;
 import ar.com.drk.live1.model.Book;
+import ar.com.drk.live1.model.Tag;
 import ar.com.drk.live1.persistence.AuthorRepository;
 import ar.com.drk.live1.persistence.BookRepository;
 import ar.com.drk.live1.persistence.CategoryRepository;
+import ar.com.drk.live1.persistence.TagRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,6 +27,8 @@ public class BookController {
   private CategoryRepository categoryRepository;
   @Autowired
   private AuthorRepository authorRepository;
+  @Autowired
+  private TagRepository tagRepository;
 
   @GetMapping
   public Iterable<Book> findAll() {
@@ -48,10 +52,14 @@ public class BookController {
     // Shortcut - if we had proper DTOs we would have received ids for category and authors
     // Also, we assume the entities we receive match one entity already persisted.
     book.setCategory(categoryRepository.findByName(book.getCategory().getName()).get());
-    final List<Author> persidedAuthors = book.getAuthors().stream()
+    final List<Author> fromRepositoryAuthors = book.getAuthors().stream()
         .map(author -> authorRepository.findByName(author.getName()).get())
         .collect(Collectors.toList());
-   book.setAuthors(persidedAuthors); // This violates encapsulation
+    book.setAuthors(fromRepositoryAuthors); // This violates encapsulation
+    final List<Tag> fromRepositoryTags = book.getTags().stream()
+        .map(tag -> tagRepository.findByName(tag.getName()).orElseGet(() -> tagRepository.save(new Tag(0, tag.getName()))))
+        .collect(Collectors.toList());
+    book.setTags(fromRepositoryTags); // This violates encapsulation
     return bookRepository.save(book);
   }
 

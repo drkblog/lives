@@ -1,27 +1,21 @@
 package ar.com.drk.live1.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
-public class Book {
+public class Tag {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   private long id;
 
   @Column(nullable = false, unique = true)
-  private String title;
-
-  @ManyToOne
-  private Category category;
-
-  @ManyToMany
-  private List<Author> authors;
-
-  @ManyToMany
-  private List<Tag> tags;
+  private String name;
 }
