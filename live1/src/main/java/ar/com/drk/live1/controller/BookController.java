@@ -9,6 +9,7 @@ import ar.com.drk.live1.persistence.AuthorRepository;
 import ar.com.drk.live1.persistence.BookRepository;
 import ar.com.drk.live1.persistence.CategoryRepository;
 import ar.com.drk.live1.persistence.TagRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,15 +20,12 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/books")
+@AllArgsConstructor(onConstructor = @__(@Autowired))
 public class BookController {
 
-  @Autowired
   private BookRepository bookRepository;
-  @Autowired
   private CategoryRepository categoryRepository;
-  @Autowired
   private AuthorRepository authorRepository;
-  @Autowired
   private TagRepository tagRepository;
 
   @GetMapping
@@ -41,14 +39,14 @@ public class BookController {
   }
 
   @GetMapping("/{id}")
-  public Book findOne(@PathVariable final Long id) {
-    return bookRepository.findById(id)
-        .orElseThrow(BookNotFoundException::new);
+  public BookResponse findOne(@PathVariable final Long id) {
+    return BookResponse.fromBook(bookRepository.findById(id)
+        .orElseThrow(BookNotFoundException::new));
   }
 
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
-  public Book create(@RequestBody final Book book) {
+  public BookResponse create(@RequestBody final Book book) {
     // Shortcut - if we had proper DTOs we would have received ids for category and authors
     // Also, we assume the entities we receive match one entity already persisted.
     book.setCategory(categoryRepository.findByName(book.getCategory().getName()).get());
@@ -60,7 +58,7 @@ public class BookController {
         .map(tag -> tagRepository.findByName(tag.getName()).orElseGet(() -> tagRepository.save(new Tag(0, tag.getName()))))
         .collect(Collectors.toList());
     book.setTags(fromRepositoryTags); // This violates encapsulation
-    return bookRepository.save(book);
+    return BookResponse.fromBook(bookRepository.save(book));
   }
 
   @DeleteMapping("/{id}")
