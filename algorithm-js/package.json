@@ -1,0 +1,20 @@
+{
+  "name": "algorithm-js",
+  "version": "1.0.0",
+  "description": "A generic JS project",
+  "main": "dist/app.js",
+  "scripts": {
+    "test": "jest",
+    "build": "webpack --mode development",
+    "release": "webpack --mode production"
+  },
+  "author": "drkbugs",
+  "license": "GPL-3.0-or-later",
+  "dependencies": {
+    "webpack": "^5.72.0",
+    "webpack-cli": "^4.9.2"
+  },
+  "devDependencies": {
+    "jest": "^28.1.2"
+  }
+}
