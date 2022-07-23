@@ -1,21 +1,19 @@
-import { isValid, isValidRecursive } from './parenthesis-matching/parenthesis-matching';
+import { findRepeated } from "./find-repeated/find-repeated";
 
-// {[()]}
+const data1 = [8, 2, 4, 3, 5, 6, 7, 6, 1, 9];
+console.log(findRepeated(data1) == 6);
 
-const formula1 = '(1 + 3) * 5';
-console.log(isValid(formula1) === true);
+const data2 = [1, 2, 3, 4, 5, 5, 6, 7, 8, 9];
+console.log(findRepeated(data2) == 5);
 
-const formula2 = '{x / [ 2 * x + (x * 2)]}';
-console.log(isValid(formula2) === true);
+const data3 = [1, 1];
+console.log(findRepeated(data3) == 1);
 
-const formulaWrong = '(1 + 3) * [ ( 1 * 5 ] )';
-console.log(isValid(formulaWrong) === false);
+const data4 = [1, 2, 3, 4];
+console.log(findRepeated(data4) == -1);
 
-const formulaOpen = '(1 + 3) * [ 1 * 5';
-console.log(isValid(formulaOpen) === false);
+const data5 = [];
+console.log(findRepeated(data5) == -1);
 
-const formulaClosed = '(1 + 3) * 1 ] * 5';
-console.log(isValid(formulaClosed) === false);
-
-const formulaNoParen = '1 + 3 * 1 * 5';
-console.log(isValid(formulaNoParen) === true);
+const data6 = ['s', 'g', 'z'];
+console.log(findRepeated(data6) == -1);
