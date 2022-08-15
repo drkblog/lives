@@ -17,6 +17,5 @@ test('identity rotation k=4', () => {
 
 test('normal rotation k=2', () => {
   const data = [1, 2, 3, 4];
-  console.log(rotate(data, 2));
   expect(rotate(data, 2)).toStrictEqual([3, 4, 1 ,2]);
 });
