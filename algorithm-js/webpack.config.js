@@ -1,9 +1,11 @@
-let path = require('path');
+import path from 'path';
 
-module.exports = {
+const configuration = {
   entry: './src/app.js',
   output: {
     path: path.resolve(__dirname),
     filename: './dist/app.js'
   }
 };
+
+export default configuration;

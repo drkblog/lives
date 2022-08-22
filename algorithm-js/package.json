@@ -5,6 +5,7 @@
   "main": "dist/app.js",
   "type": "module",
   "scripts": {
+    "run": "node .",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
     "build": "webpack --mode development",
     "release": "webpack --mode production"
