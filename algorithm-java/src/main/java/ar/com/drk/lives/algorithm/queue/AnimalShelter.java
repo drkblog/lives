@@ -35,8 +35,10 @@ public class AnimalShelter {
     final Dog dog = dogsQueue.getFirst();
     final Cat cat = catsQueue.getFirst();
     if (dog.cameBefore(cat)) {
+      dogsQueue.poll();
       return dog;
     } else {
+      catsQueue.poll();
       return cat;
     }
   }
