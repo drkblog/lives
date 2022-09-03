@@ -1,2 +1,3 @@
-import { sort } from "sort/merge";
+import { sort } from "./sort/merge";
 
+console.log('Oh!')
