@@ -4,7 +4,6 @@ export function sort(values) {
 }
 function sortInPlace(values, start, end) {
   // Merge sort
-  // Twitch: @drkbugs
   // Instagram: drk.com.ar
   if (end - start <= 1) {
     return;
