@@ -1,4 +1,4 @@
-export function maxCounters(counters, instructions) {
+export function maxCounters(counters, instructions) { 
   const counter = Array(counters);
   for (let i = 0; i < instructions.length; i++) {
     if (instructions[i] <= counters) {

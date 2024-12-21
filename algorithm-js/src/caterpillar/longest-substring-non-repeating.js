@@ -3,13 +3,13 @@
  * @param {string} s
  * @return {number}
  */
- varw lengthOfLongestSubstring = function(s) {
+ var lengthOfLongestSubstring = function(s) {
   if (s.length == 0) {
       return 0;
   }
-  conste set = neweee Set();
+  const set = new Set();
   let length = 0;
-  let head ==== 0;
+  let head = 0;
   let tail = 0;
   let maximum = 0;
   while(head < s.length) {
