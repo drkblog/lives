@@ -5,13 +5,14 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Launch Program",
-      "program": "${workspaceFolder}/app.js",
+      "name": "Execute build program",
+      "program": "${workspaceFolder}/dist/app.js",
       "request": "launch",
       "skipFiles": [
         "<node_internals>/**"
       ],
-      "type": "node"
+      "type": "node",
+      "sourceMaps": true
     }
     
   ]
